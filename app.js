@@ -15,16 +15,21 @@ var commentRoutes       = require ("./routes/comments"),
     campgroundRoutes    = require ("./routes/campgrounds"),
     indexRoutes          = require ("./routes/index")            
 
+var url = process.env.DATABASEURL ||"mongodb://localhost:27017/yelp_camp"
 
-//console.log (process.env.DATABASEURL);  
-mongoose.connect (process.env.DATABASEURL, { useNewUrlParser: true,}); //useUnifiedTopology: true});
+mongoose.connect(url, { useNewUrlParser: true});
+ 
+//mongoose.connect (process.env.DATABASEURL, { useNewUrlParser: true});//local DB
 
+//mongoose.connect ("mongodb+srv://alexmbenavidez:alex@cluster0-wx25v.mongodb.net/YelpCampFinal?retryWrites=true&w=majority",{ useNewUrlParser: true, });//Atlas DB
 
-//mongoose.connect ("mongodb+srv://alexmbenavidez:alex@cluster0-wx25v.mongodb.net/YelpCampFinal?retryWrites=true&w=majority",{ useNewUrlParser: true, });
-
-
+//console.log (process.env.DATABASEURL); 
+//useUnifiedTopology: true});
 
 mongoose.set('useFindAndModify', false);
+
+
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
